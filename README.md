@@ -320,4 +320,4 @@ Este projeto foi desenvolvido no âmbito da disciplina de **Tecnologias Web** da
 
 ### Autores
 - André Gonçalves
-- André Zhan
+- [André Zhan](https://github.com/andr-zhan)
