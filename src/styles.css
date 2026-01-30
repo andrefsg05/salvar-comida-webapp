@@ -1,0 +1,944 @@
+
+/* ==================================== */
+/* 1. Variáveis de Tema (Custom Properties) */
+/* ==================================== */
+
+/* Variáveis do tema: cores, espaçamentos, sombras e valores reutilizáveis */
+
+:root{
+    --accent: #16697a; /* Cor de destaque principal (ciano escuro) */
+    --accent-dark: #0d323d; 
+    --bg: #ffffff; 
+    --muted: #6b6b6b; 
+
+    --width: 1200px; 
+    --rounded: 8px;
+
+    --box-shadow-light: 0 6px 12px rgba(0, 0, 0, 0.1);
+    --box-shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.15); 
+}
+
+/* ==================================== */
+/* 2. Estilos Base e Reset */
+/* ==================================== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    font-family: system-ui, Arial, sans-serif;
+    color: #111;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+
+h3{
+    margin: 0;
+}
+
+/* ==================================== */
+/* 3. Cabeçalho (Header) e Navegação (Nav) */
+/* ==================================== */
+/* Estilos para o cabeçalho do site (background gradiente) */
+header.site-header {
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    color: #fff;
+    padding: 14px 12px;
+}
+
+/* Container interno do cabeçalho */
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 12px;
+}
+
+/* Estilo para a imagem do logotipo */
+.site-logo {
+    width: 200px;
+    height: 100px;
+    object-fit: contain; 
+    background: transparent;
+}
+
+/* Estilo para o subtítulo sob o título principal na área pública/landing */
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 2px;
+    opacity: 0.95;
+}
+
+/* Estilos para a navegação principal */
+.main-nav ul {
+    list-style: none;
+    display: flex; 
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo dos links de navegação (cor, espaçamento, borda arredondada) */
+.main-nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: .45rem .7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-weight: 600;
+}
+
+/* Efeito ao passar o mouse no link de navegação */
+.main-nav a:hover,
+.main-nav a:focus {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Estilo para o link de navegação ativo */
+.main-nav a.active {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* ==================================== */
+/* 4. Conteúdo Principal (Main) */
+/* ==================================== */
+/* Estilos para a área de conteúdo principal */
+.site-main {
+    width: 100%;
+    max-width: var(--width);
+    margin: 18px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: var(--bg);
+    border-radius: var(--rounded);
+    box-shadow: var(--box-shadow-medium);
+    flex: 1 0 auto;
+    position: relative;
+}
+
+/* ==================================== */
+/* 5. Rodapé (Footer) */
+/* ==================================== */
+
+footer.site-footer {
+    background: #0c2e3a; 
+    color: #eee;
+    padding: 18px 10px;
+    margin-top: 20px;
+}
+
+/* Container interno do rodapé */
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 12px;
+}
+
+/* Estilos para cada seção do rodapé */
+.footer-section {
+    min-width: 200px;
+}
+
+/* Estilo do título da seção do rodapé */
+.footer-section h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.2rem;
+}
+
+/* Estilo dos links no rodapé */
+.footer-section a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Estilo para imagens dentro do rodapé */
+footer.site-footer .footer-section img,
+footer.site-footer img {
+    max-width: 140px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Texto abaixo dos títulos do rodapé um pouco menor */
+.footer-section p,
+.footer-section a {
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Espaçamento superior para as seções principais da aplicação */
+.secao-public,
+.secao-cliente,
+.secao-restaurante,
+.secao-admin {
+    margin-top: 2.5rem;
+}
+
+/* ==================================== */
+/* 6. Elementos Reutilizáveis (Cards, Botões, Formulários, Mensagens) */
+/* ==================================== */
+
+/* Estilo base para cartões (cards) */
+.card {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: var(--box-shadow-medium);
+}
+
+/* Efeito visual ao passar o mouse sobre o cartão (leve levantamento) */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-light);
+}
+
+/* Remove o efeito de hover para cartões que são formulários */
+.form-card:hover {
+    transform: none;
+    box-shadow: var(--box-shadow-medium);
+}
+
+/* Botão de Ação Principal (usado na Landing Page) */
+.btn-primary {
+    display: inline-block;
+    background: #062e2d;
+    color: #fff;
+    padding: 1rem 1.8rem;
+    border-radius: 999px;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Efeito de hover para o botão principal */
+.btn-primary:hover {
+    opacity: 0.95;
+}
+
+/* Estilo padrão para botões e inputs de submit */
+button,
+input[type='submit'] {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: none;
+    font-weight: bold;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Efeito de hover padrão para botões */
+button:hover {
+    opacity: 0.9;
+}
+
+/* Estilo para o botão "Mostrar mais" */
+.btn-more {
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilo base para formulários */
+form {
+    display: grid;
+    gap: 10px;
+}
+
+/* Contêiner para botões de ação do formulário */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Estilos para campos de input de texto, número, pesquisa, select e textarea */
+input[type='text'],
+input[type='number'],
+input[type='search'],
+select,
+textarea {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    font-size: 1rem;
+    width: 100%;
+}
+
+/* Estilo base para mensagens de feedback */
+.msg {
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+/* Estilo para mensagem de sucesso */
+.msg-success {
+    background: #e6f5ea;
+    border: 1px solid #2e7d32;
+    color: #0f5b29;
+}
+
+/* Estilo para mensagem de erro*/
+.msg-error {
+    background: #fdecea;
+    border: 1px solid #c62828;
+    color: #b71c1c;
+}
+
+/* Classe de utilidade para ocultar elementos */
+.hidden {
+    display: none;
+}
+
+/* ==================================== */
+/* 7. Estilos de Landing Page (Introdução, Seções de Informação) */
+/* ==================================== */
+
+/* Caixa de conteúdo central na seção inicial */
+.content-box {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    border-radius: 15px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    color: #fff;
+    text-align: center;
+    margin-top: 40px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    box-shadow: var(--box-shadow-medium);
+}
+
+/* Estilo do texto de chamada central */
+#texto-central {
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: 0.04em;
+}
+
+/* Estilo para o texto de introdução abaixo do content-box */
+.intro-text {
+    margin: 80px auto 0 auto;
+    font-size: 1.1rem;
+    max-width: 800px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Estilos para a seção de informações */
+.info-section {
+    margin-top: 80px;
+    padding: 40px 0;
+    background-color: var(--bg);
+    text-align: center;
+}
+
+/* Título da seção de informações */
+.info-section h2 {
+    color: var(--accent-dark);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Parágrafos da seção de informações */
+.info-section p {
+    color: var(--muted);
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+
+/* Layout Flexbox para organizar imagem e cards de informação lado a lado */
+.info-layout {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Área para a imagem na seção de informações */
+.info-image {
+    flex: 1;
+    text-align: center;
+}
+
+/* Estilo para a imagem dentro da seção */
+.info-image img {
+    max-width: 100%;
+    border-radius: var(--rounded);
+}
+
+/* Área para os cards de informação  */
+.info-content {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Estilo para cada card de informação */
+.info-card {
+    background-color: var(--bg);
+    border-radius: var(--rounded);
+    box-shadow: var(--box-shadow-medium);
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Título do card de informação */
+.info-card h3 {
+    color: var(--accent-dark);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Parágrafo do card de informação */
+.info-card p {
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+/* Efeito de hover para o card de informação */
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ==================================== */
+/* 8. Área Pública (Ofertas e Filtros) */
+/* ==================================== */
+
+/* Estilos para a seção "Público" */
+#public {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra de filtros (selects e inputs de pesquisa) */
+.filtro-bar {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Rótulo dos filtros */
+.filtro-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Estilo para campos de select e input na barra de filtro */
+.filtro-select,
+.filtro-input {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+/* Largura máxima para o select de restaurante (quando visível) */
+.filtro-restaurante {
+    max-width: 220px;
+    overflow-y: auto;
+}
+
+/* Largura padrão para inputs de pesquisa na barra de filtro */
+.filtro-input {
+    width: 230px;
+}
+
+/* Layout para a lista de ofertas */
+.ofertas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Layout para a lista de restaurantes */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+    max-width: 900px;
+    width: 100%;
+}
+
+/* Contêiner para centralizar o botão "Mostrar mais" */
+.ofertas-more-wrapper {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilo para cada cartão de oferta (descendentes, não apenas filhos diretos) */
+.ofertas-lista .card {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Estilo da imagem da oferta no cartão */
+.ofertas-lista .card img {
+    width: 220px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+/* Corpo do cartão (texto) */
+.card-body {
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0; 
+}
+
+/* Título da oferta no cartão */
+.card-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+/* Subtítulo ou descrição curta no cartão */
+.card-subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+}
+
+/* Metadados para visualização do administrador */
+.card-meta-admin {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(0,0,0,0.06);
+    color: var(--muted);
+    font-size: 0.88rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Ajuste de linha para os metadados */
+.card-meta-admin .meta-owner,
+.card-meta-admin .meta-registro {
+    line-height: 1.2;
+}
+
+/* Rodapé do cartão ) */
+.card-footer {
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+/* ==================================== */
+/* 9. /Janela de Oferta */
+/* ==================================== */
+
+/* Estilo para a janela */
+.oferta-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.25);
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.12s ease-out;
+    z-index: 1000;
+}
+
+/* Classe para tornar a modal visível */
+.oferta-window-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Conteúdo da janela (o card branco central) */
+.oferta-window-content {
+    max-width: 720px;
+    background: #ffffff;
+    color: #111;
+    border-radius: 16px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+    padding: 20px 22px 60px 22px; 
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+}
+
+/* Cabeçalho do conteúdo */
+.oferta-window-header {
+    margin-bottom: 8px;
+}
+
+/* Título da oferta na janela */
+.oferta-window-titulo {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Descrição da oferta na janela */
+.oferta-window-descricao {
+    margin: 4px 0 10px 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Metadados da oferta (restaurante, morada, unidades) */
+.oferta-window-meta {
+    margin: 2px 0;
+    font-size: 1rem;
+}
+
+/* Botão "Reservar" na janela (posicionado no canto inferior direito) */
+#oferta-window-reservar {
+    position: absolute;
+    right: 14px;
+    bottom: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Imagem da oferta na modal */
+#oferta-window-imagem {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+/* ==================================== */
+/* 10. Áreas Específicas (Cliente, Restaurante, Admin) */
+/* ==================================== */
+
+/* Estilos gerais para a área do cliente */
+.client-area {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Card do perfil do cliente (posicionado no canto superior direito do main) */
+.client-profile {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 12px;
+    background: var(--bg);
+    border-radius: var(--rounded);
+    box-shadow: var(--box-shadow-light);
+}
+
+/* Título do nome do cliente no perfil */
+.client-profile h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+/* Botões de ação no perfil do cliente (ex: Logout) */
+.client-actions button {
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: #fff;
+    color: var(--accent);
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+}
+
+/* Efeito de hover nos botões de ação do cliente */
+.client-actions button:hover {
+    opacity: 0.95;
+}
+
+/* Estilo específico para o formulário de login do cliente */
+#form-cliente-login {
+    max-width: 600px;
+    min-width: 500px;
+    min-height: 200px;
+    max-height: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Alinhamento dos botões no formulário de login do cliente */
+#cliente-login .form-actions {
+    align-self: flex-end;
+    justify-content: flex-end;
+}
+
+/* Estilos para a área do restaurante (login e dashboard) */
+#restaurante-area {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tamanho máximo para os painéis de login e dashboard do restaurante */
+#restaurante-login,
+#restaurante-dashboard {
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* Layout para o formulário de login do restaurante */
+#restaurante-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Labels em bloco para melhor alinhamento */
+#restaurante-login label {
+    display: block;
+}
+
+/* Alinhamento dos botões no formulário de login do restaurante */
+#restaurante-login .form-actions {
+    align-self: flex-end;
+    justify-content: flex-end;
+}
+
+/* Alinhamento dos botões no dashboard do restaurante (inserir/logout) */
+#restaurante-dashboard .form-actions {
+    justify-content: space-between;
+}
+
+/* Estilos para a área de administração (login e dashboard) */
+#admin-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+/* Dashboard do administrador (ocupa toda a largura do site-main) */
+#admin-dashboard {
+    width: 100%;
+    max-width: 100%;
+    margin: 12px 0;
+    padding: 20px;
+}
+
+/* Login do administrador (centralizado) */
+#admin-login {
+    justify-content: space-between;
+    max-width: 600px;
+    min-width: 500px;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* Labels em bloco para melhor alinhamento */
+#admin-login label,
+#admin-dashboard label {
+    display: block;
+}
+
+/* Alinhamento dos botões no login e dashboard do administrador */
+#admin-login .form-actions,
+#admin-dashboard .form-actions {
+    align-self: flex-end;
+}
+
+/* ==================================== */
+/* 11. Media Queries (Responsividade) */
+/* ==================================== */
+
+
+@media (max-width: 1040px) {
+    .site-main {
+        min-width: unset;
+        max-width: 95%;
+    }
+}
+
+
+@media (max-width: 760px) {
+
+    .header-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 8px;
+    }
+
+
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 8px;
+        padding: 8px 0;
+    }
+
+
+    .site-main {
+        margin: 12px;
+    }
+
+
+    .info-layout {
+        flex-direction: column;
+    }
+
+
+    .info-image, .info-content {
+        flex: unset;
+    }
+
+    .ofertas-lista .card img {
+        width: 140px;
+        height: 110px;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+        max-width: 95%;
+        width: 100%;
+        margin: 12px auto;
+    }
+
+    #form-cliente-login {
+        min-width: unset;
+        max-width: 95%;
+    }
+
+    #form-cliente-login {
+        width: 100%;
+        margin: 12px auto;
+        box-sizing: border-box;
+    }
+
+    #cliente-login {
+        padding-bottom: 18px;
+    }
+
+    #cliente-login .form-actions button {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .client-profile {
+        position: static;
+        align-items: center;
+    }
+
+    #admin-login {
+        min-width: unset;
+        max-width: 95%;
+        width: 100%;
+        margin: 12px auto;
+    }
+
+    .client-area {
+        min-height: 35vh;
+    }
+
+    .main-nav a {
+        display: inline-block;
+        white-space: nowrap;
+        margin: 6px 4px;
+    }
+}
+
+@media (max-width: 500px) {
+    .ofertas-lista > .card {
+        flex-direction: column;
+    }
+
+    .ofertas-lista > .card img {
+        width: 100%;
+        height: 180px;
+    }
+
+    .filtro-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtro-label {
+        margin-top: 5px;
+    }
+
+    .filtro-select,
+    .filtro-input {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    #texto-central {
+        font-size: 1.8rem;
+    }
+
+    .site-logo {
+        width: 150px;
+        height: 75px;
+    }
+}

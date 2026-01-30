@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Salvar Comida</title>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<!-- Cabecalho do site  -->
+	<header class="site-header">
+		<div class="header-inner">
+			<div class="site-title">
+				<a href="#inicio" class="logo-link" aria-label="Início">
+					<img src="img/logo.png" alt="Logo Salvar Comida" class="site-logo" />
+				</a>
+			</div>
+
+				<!-- Navegacao principal -> usa links por #hash para alternar secoes sem recarregar a pagina -->
+			<nav class="main-nav" aria-label="Menu principal">
+				<ul>
+					<li><a href="#inicio">🏠︎</a></li>
+					<li><a href="#public">Público</a></li>
+					<li><a href="#cliente">Cliente</a></li>
+					<li><a href="#restaurante">Restaurante</a></li>
+					<li><a href="#admin">Administração</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main id="app" class="site-main">
+
+		<!-- Secao "Inicio" - landing principal com chamada a acao para navegar a area publica -->
+		<section id="inicio">
+			<div class="content-box">
+				<div id="texto-central">
+					<p>Salvar Boa Comida Do Desperdício</p>
+					<p>Reserve já!</p>
+				</div>
+				<a href="#public" class="btn-primary">🔍 Consultar Ofertas</a>
+				
+			</div>
+			<div class="intro-text">
+				<hr/>
+				<p>A plataforma <b>Salvar Comida</b> é uma iniciativa da associação de restaurantes de Évora, dedicada a <u>combater o desperdício alimentar</u> na região do Alentejo.</p>
+				<p>Conectamos restaurantes que têm refeições de última hora – que estão a chegar ao fim da sua validade, mas continuam em perfeitas condições – com consumidores que procuram produtos de qualidade a um preço muito mais acessível.</p>
+				<hr/>
+			</div>
+
+			<div id="info" class="info-section">
+				<div class="info-layout">
+					<div class="info-image">
+						<img src="img/info.png" alt="Salvar Comida" />
+					</div>
+					<div class="info-content">
+						<div class="info-card">
+							<h3>Público</h3>
+							<p>Explore as ofertas disponíveis e encontre restaurantes que estão a oferecer refeições de última hora a preços acessíveis.</p>
+						</div>
+						<div class="info-card">
+							<h3>Cliente</h3>
+							<p>Acesse sua área personalizada para reservar a sua próxima refeição.</p>
+						</div>
+						<div class="info-card">
+							<h3>Restaurante</h3>
+							<p>Cadastre seu restaurante para oferecer refeições excedentes, reduzir desperdícios e alcançar novos clientes.</p>
+						</div>
+						<div class="info-card">
+							<h3>Administração</h3>
+							<p>Gerencie a plataforma, monitore os dados para garantir o sucesso da iniciativa.</p>
+						</div>
+					</div>
+				</div>
+				</div>
+		</section>
+
+		<!-- Secao "Publico" - lista ofertas e restaurantes -->
+		<section id="public" class="secao-public">
+			<h1>Área Pública</h1>
+			<p class="subtitle">Vê ofertas ou restaurantes disponíveis hoje!</p>
+
+			<!-- Barra de filtros: controla quais itens sao mostrados e os termos de pesquisa -->
+			<div class="filtro-bar">
+				<label class="filtro-label">Ver:</label>
+				<!-- filtro-tipo-lista: determina se mostramos ofertas ou restaurantes -->
+				<select id="filtro-tipo-lista" class="filtro-select">
+					<option value="ofertas">Ofertas</option>
+					<option value="restaurantes">Restaurantes</option>
+				</select>
+				<label id="label-filtro-restaurante" class="filtro-label">Filtrar por:</label>
+				<!-- filtro-restaurante-select: permite filtrar ofertas por restaurante (preenchido via JS) -->
+				<select id="filtro-restaurante-select" class="filtro-select filtro-restaurante"></select>
+				<input id="filtro-restaurante-input" type="search" placeholder="Escreve o nome ou morada do restaurante" class="filtro-input" style="display:none" />
+				<!-- filtro-comida-input: pesquisa por nome/descricao da oferta -->
+				<input id="filtro-comida-input" type="search" placeholder="Escreve o nome da comida" class="filtro-input" />
+			</div>
+			<div id="lista-ofertas" class="ofertas-lista"></div>
+			<div id="lista-restaurantes" class="card-grid" style="display:none"></div>
+			<div class="ofertas-more-wrapper">
+				<!-- btn-ofertas-mais: carrega mais ofertas no modo publico -->
+				<button id="btn-ofertas-mais" type="button" class="btn-more">Mostrar mais</button>
+			</div>
+		</section>
+
+		<!-- Seccao "Cliente" - area para clientes autenticados: login, dashboard e filtros pessoais -->
+		<section id="cliente" class="secao-cliente">
+				<h1>Área do Cliente</h1>
+
+				<div id="cliente-login" class="client-area">
+					<!-- form-cliente-login: autentica o cliente por username + ID -->
+					<form id="form-cliente-login" class="card form-card">
+						<h3>Login</h3>
+						<label>Nome de utilizador (username)
+							<input id="cliente-username" name="username" type="text" placeholder="ex.: user9001" required />
+						</label>
+						<label>Palavra-passe (ID do cliente)
+							<input id="cliente-id" name="id" type="number" placeholder="ex.: 9001" required />
+						</label>
+						<div class="form-actions">
+							<button id="btn-cliente-login" type="submit">Entrar</button>
+						</div>
+						<div id="cliente-login-msg" class="msg" role="status" aria-live="polite" style="display:none"></div>
+					</form>
+				</div>
+
+				<div id="cliente-dashboard" class="client-offers" style="display:none">
+					<div class="card client-profile">
+						<div>
+							<h3 id="cliente-nome">Cliente: —</h3>
+							<div class="muted" id="cliente-id-label">ID: —</div>
+						</div>
+					</div>
+
+					<div id="cliente-offers-area" class="client-offers" style="display:none"> 
+						<div class="filtro-bar">
+							<label class="filtro-label">Ver:</label>
+							<select id="cliente-filtro-tipo-publico" class="filtro-select">
+								<option value="ofertas">Ofertas</option>
+								<option value="restaurantes">Restaurantes</option>
+							</select>
+							<label id="cliente-label-filtro-restaurante" class="filtro-label">Filtrar por:</label>
+							<select id="cliente-filtro-restaurante-select" class="filtro-select filtro-restaurante"></select>
+							<input id="cliente-filtro-restaurante-input" type="search" placeholder="Escreve o nome ou morada do restaurante" class="filtro-input" style="display:none" />
+							<input id="cliente-filtro-comida-input" type="search" placeholder="Escreve o nome da comida" class="filtro-input" />
+						</div>
+						<div id="cliente-lista-ofertas" class="ofertas-lista"></div>
+						<div id="cliente-lista-restaurantes" class="card-grid" style="display:none"></div>
+						<div class="ofertas-more-wrapper">
+							<!-- btn-cliente-ofertas-mais: carrega mais ofertas no modo cliente (similar a publico) -->
+							<button id="btn-cliente-ofertas-mais" type="button" class="btn-more">Mostrar mais</button>
+						</div>
+					</div>
+				</div>
+
+		</section>
+		<!-- Secao "Restaurante" - login para restaurantes e form para inserir ofertas -->
+		<section id="restaurante" class="secao-restaurante">
+			<h1>Área do Restaurante</h1>
+			<p class="subtitle">Insera Novas ofertas</p>
+			<div id="restaurante-area">
+				<div id="restaurante-login" class="card form-card">
+					<h3>Login do Restaurante</h3>
+					<label>Selecione o restaurante
+						<select id="restaurante-select-login">
+							<option value="">-- Selecionar --</option>
+						</select>
+					</label>
+					<div class="form-actions">
+						<button id="btn-restaurante-login" type="button">Entrar</button>
+					</div>
+					<div id="restaurante-login-msg" class="msg" style="display:none"></div>
+				</div>
+
+				<div id="restaurante-dashboard" class="card form-card" style="display:none; margin-top:12px">
+					<h3 id="restaurante-dashboard-title">Restaurante: —</h3>
+					<!-- form-restaurante-oferta: formulario para restaurantes criarem novas ofertas -->
+					<form id="form-restaurante-oferta">
+						<label>Nome da oferta
+							<input id="oferta-nome" name="nome" type="text" placeholder="ex.: Menu do dia" required />
+						</label>
+						<label>URL da foto
+							<input id="oferta-foto" name="foto" type="url" placeholder="https://.../imagem.jpg" required />
+						</label>
+						<label>Descrição
+							<textarea id="oferta-descricao" name="descricao" rows="3" placeholder="Descrição da oferta" required></textarea>
+						</label>
+						<label>Unidades
+							<input id="oferta-unidades" name="unidades" type="number" min="1" value="1" required />
+						</label>
+						<div class="form-actions">
+							<button id="btn-oferta-inserir" type="submit">Inserir Oferta</button>
+						</div>
+						<div id="restaurante-oferta-msg" class="msg" style="display:none"></div>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		   <!-- Secao "Administracao" - aceder a listas administrativas (restaurantes, clientes, ofertas) -->
+		<section id="admin" class="secao-admin">
+			<h1>Área de Administração</h1>
+			<div id="admin-area">
+				<div id="admin-login" class="card form-card">
+					<h3>Autenticar como administrador</h3>
+					<div class="form-actions">
+						<button id="btn-admin-login" type="button">Login</button>
+					</div>
+					<div id="admin-login-msg" class="msg" style="display:none"></div>
+				</div>
+
+			<div id="admin-dashboard" class="card form-card" style="display:none; margin-top:12px; padding:12px;">
+				<h3>Dashboard de Administração</h3>
+				<div class="filtro-bar">
+					<label class="filtro-label">Ver:</label>
+					<select id="admin-view-select" class="filtro-select">
+						<option value="restaurantes">Restaurantes</option>
+						<option value="clientes">Clientes</option>
+						<option value="ofertas">Ofertas</option>
+					</select>
+					<label class="filtro-label">Filtrar por:</label>
+					<!-- admin-filter-input: pesquisa/lista dados no dashboard do admin (restaurantes, clientes, ofertas) -->
+					<input id="admin-filter-input" type="search" placeholder="Nome, morada (restaurante) ou ID" class="filtro-input" />
+				</div>
+
+				<div id="admin-list-restaurantes" class="card-grid" style="margin-top:12px"></div>
+				
+				<div id="admin-list-clientes" class="card-grid" style="display:none; margin-top:12px"></div>
+				
+				<div id="admin-list-ofertas" class="ofertas-lista" style="display:none; margin-top:12px"></div>
+
+				<div class="ofertas-more-wrapper">
+					<!-- btn-admin-mostrar-mais: mostra mais ofertas na vista admin (apenas usado quando admin ve-ofertas) -->
+					<button id="btn-admin-mostrar-mais" type="button" class="btn-more" style="display:none;">Mostrar mais</button>
+				</div>
+			</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Janela/overlay de detalhe de oferta -->
+	<div id="oferta-window" class="oferta-window" aria-hidden="true">
+		<div class="oferta-window-content">
+			<img id="oferta-window-imagem" alt="Imagem da oferta" />
+			<div class="oferta-window-header">
+				<h3 id="oferta-window-nome" class="oferta-window-titulo"></h3>
+			</div>
+			<p id="oferta-window-descricao" class="oferta-window-descricao"></p>
+			<p id="oferta-window-restaurante" class="oferta-window-meta"></p>
+			<p id="oferta-window-morada" class="oferta-window-meta"></p>
+			<p id="oferta-window-coords" class="oferta-window-meta"></p>
+			<p id="oferta-window-unidades" class="oferta-window-meta"></p>
+			<!-- oferta-window-reservar: botao visivel na janela de detalhe para iniciar reserva (apenas para clientes autenticados) -->
+			<button id="oferta-window-reservar" type="button">Reservar</button>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<div class="footer-section">
+				<h3>Contactos</h3>
+				<p><a href="mailto:l58392@alunos.uevora.pt">✉ l58392@alunos.uevora.pt</a></p>
+				<p><a href="mailto:l58762@alunos.uevora.pt">✉ l58762@alunos.uevora.pt</a></p>
+			</div>
+
+			<div class="footer-section">
+				<h3>Créditos</h3>
+				<p>André Gonçalves nº58392</p>
+				<p>André Zhan nº58762</p>
+			</div>
+
+			<div class="footer-section">
+				<h3>Com o apoio de</h3>
+				<p>
+					<a href="https://www.uevora.pt/" target="_blank" rel="noopener noreferrer"><img src="img/uni_logo.png" alt="Universidade de Évora"></a>
+				</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Carregamento dos Scripts -->
+	<script src="js/api.js"></script>
+	<script src="js/global.js"></script>
+	<script src="js/public.js"></script>
+	<script src="js/client.js"></script>
+	<script src="js/restaurant.js"></script>
+	<script src="js/admin.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
+
